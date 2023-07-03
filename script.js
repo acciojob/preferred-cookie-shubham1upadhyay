@@ -1,28 +1,22 @@
 const fontSizeInput = document.getElementById("fontsize")
 const fontColorInput = document.getElementById("fontcolor")
 
+let cookies = document.cookie ;
+
 function set(){
-	let size = fontSizeInput.value;
-	let color = fontColorInput.value;
-	localStorage.setItem('size', size)
-	localStorage.setItem('color', color);
+  let fValue = fontSizeInput.value;
+  let cValue = fontColorInput.value;
 
-	apply();
+  let cookieString = fValue + '=' + cValue;
+
+  let sCookie = cookieString.split("=")
+
+  document.body.style.fontSize = `${sCookie[0]}px`;
+  console.log( document.body.style.fontSize = `${sCookie[0]}px`)
+  document.body.style.color = sCookie[1];
+  console.log(document.body.style.color = sCookie[1])
 }
-
-function apply(){
-	let s = localStorage.getItem('size');
-	let c = localStorage.getItem('color');
-
-	document.body.style.fontSize = `${s}px`;
-	document.body.style.color = c;
-}
-
 document.addEventListener('submit', (event)=>{
 	event.preventDefault();
 	set();
-})
-
-window.addEventListener('load', ()=>{
-	apply();
 })
